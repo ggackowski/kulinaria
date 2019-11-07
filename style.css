@@ -1,6 +1,6 @@
 body {
   margin: 0;
-
+  
 
   --main-color: #F25F5C;
   --second-color: #50514F;
@@ -19,7 +19,10 @@ header {
 #log-in > form {
   display: flex;
   align-items: center;
+  
 }
+
+
 
 #log-in form div {
   margin-left: 10px;
@@ -34,11 +37,20 @@ header {
   margin-right: 10px;
 }
 
+.Gray {
+  background-color: var(--second-color);
+  color: white;
+}
+
 .enter input {
-  background-color: white;
   border: none;
   padding: 5px;
+  
 
+}
+
+.White {
+  background-color: white;
 }
 
 .enter input:hover {
@@ -55,6 +67,12 @@ header > span {
   font-size: 30px;
 }
 
+@media (max-width: 600px) {
+  header > span {
+    font-size: 50px;
+  }
+}
+
 main {
   
   padding: 0;
@@ -64,6 +82,8 @@ main {
 nav {
   background-color: var(--second-color);
   margin: 0;
+  position: -webkit-sticky;
+  display: sticky;
 }
 
 nav > ul {
@@ -87,6 +107,9 @@ nav > ul > a:hover {
   background-color: var(--second-darker-color);
 }
 
+
+
+
 #grid {
   margin: auto;
   width: 90%;
@@ -97,8 +120,11 @@ nav > ul > a:hover {
   margin-bottom: 20px;
 }
 
+
 .rec {
 font-family: Cambria;
+border: 2px solid var(--second-color);
+border-radius: 3px;
 }
 
 .rec  img {
@@ -107,11 +133,21 @@ font-family: Cambria;
 
 .rec:hover {
   background-color: var(--main-color);
+  transition: background-color 0.2s; 
+}
+
+.banner {
+  text-align: center;
+  margin: 60px 0;
+}
+
+.rec:hover div {
   cursor: pointer;
 }
 
 .rec:hover img {
   filter: brightness(80%);
+  transition: filter 0.2s;
   cursor: pointer;
 }
 
@@ -127,10 +163,20 @@ font-family: Cambria;
 #check6:checked ~ .popup
 {
   display: block;
-  width: auto;
-  
+  size: inherit;
   background-color: white;
   
+  
+}
+
+#check1:checked ~ *,
+#check2:checked ~ *,
+#check3:checked ~ *,
+#check4:checked ~ *,
+#check5:checked ~ *,
+#check6:checked ~ * 
+{
+  display: none;
 }
 
 .rec  div {
@@ -150,4 +196,59 @@ footer {
 
 footer > p {
   text-align: center;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  margin: 60px;
+}
+
+section * {
+  font-size: 16px;
+}
+
+@media (max-width: 1200px) {
+  #grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  #grid {
+    grid-template-columns: 1fr;
+  }
+  header {
+    flex-direction: column;
+  }
+  #log-in > form {
+    margin-bottom: 20px;
+    flex-direction: column;
+  }
+
+  #log-in > form div {
+    margin: 10px 0;
+
+  }
+
+  #log-in > form div * {
+        font-size: 20px;
+  }
+
+  section input, label {
+    font-size: 20px;
+  }
+  nav > ul {
+    flex-direction: column;
+    margin: 0;
+  }
+  
+  nav > ul > a {
+    padding: 20px 0;
+    font-size: 20px;
+  }
+
+  footer * {
+    font-size: 20px;
+  }
 }
