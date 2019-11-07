@@ -1,0 +1,153 @@
+body {
+  margin: 0;
+
+
+  --main-color: #F25F5C;
+  --second-color: #50514F;
+  --second-darker-color: rgb(62, 63, 61);
+  --border-color: #FFE066;
+}
+
+header {
+  background-color: var(--main-color);
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#log-in > form {
+  display: flex;
+  align-items: center;
+}
+
+#log-in form div {
+  margin-left: 10px;
+}
+
+.log input {
+  padding: 5px;
+  border: none;
+}
+
+.enter {
+  margin-right: 10px;
+}
+
+.enter input {
+  background-color: white;
+  border: none;
+  padding: 5px;
+
+}
+
+.enter input:hover {
+  cursor: pointer;
+  filter: brightness(80%);
+}
+
+
+header > span {
+  display: inline-block;
+  padding: 10px;
+  font-family: 'Comic Sans MS';
+  color: white;
+  font-size: 30px;
+}
+
+main {
+  
+  padding: 0;
+  margin: 0 auto;
+}
+
+nav {
+  background-color: var(--second-color);
+  margin: 0;
+}
+
+nav > ul {
+  display: flex;
+  padding: 0;
+  margin: 0 0 0 5%;
+}
+
+nav > ul > a > li {
+  list-style-type: none;
+  padding:  10px 20px 10px 20px;
+}
+
+
+nav > ul > a {
+  text-decoration: none;
+  color: white;
+}
+
+nav > ul > a:hover {
+  background-color: var(--second-darker-color);
+}
+
+#grid {
+  margin: auto;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.rec {
+font-family: Cambria;
+}
+
+.rec  img {
+  width: 100%;
+}
+
+.rec:hover {
+  background-color: var(--main-color);
+  cursor: pointer;
+}
+
+.rec:hover img {
+  filter: brightness(80%);
+  cursor: pointer;
+}
+
+#check1, #check2, #check3, #check4, #check5, #check6 {
+  display: none;
+}
+
+#check1:checked ~ .popup,
+#check2:checked ~ .popup,
+#check3:checked ~ .popup,
+#check4:checked ~ .popup,
+#check5:checked ~ .popup,
+#check6:checked ~ .popup
+{
+  display: block;
+  width: auto;
+  
+  background-color: white;
+  
+}
+
+.rec  div {
+  padding: 15px;
+}
+
+.popup {
+  display: none;
+}
+
+footer {
+  background-color: var(--main-color);
+  padding: 40px;
+  color: white;
+  margin: 0 auto;
+}
+
+footer > p {
+  text-align: center;
+}
