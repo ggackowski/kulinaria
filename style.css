@@ -1,13 +1,15 @@
 body {
   margin: 0;
   
-
+  font-family: 'Lato', sans-serif;
   --main-color: #F25F5C;
   --second-color: #50514F;
   --second-darker-color: rgb(62, 63, 61);
   --border-color: #FFE066;
 }
-
+p {
+  font-family: 'Lato', sans-serif;
+}
 header {
   background-color: var(--main-color);
   margin: 0;
