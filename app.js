@@ -38,11 +38,13 @@ class Recipe {
 
     this.produceHTML = function() {
       return (`
+      <div class="delete"><p>X</p></div>
       ${this.convertImg()}
       <div> 
       ${this.convertTitle()} 
       ${this.convertDesc()}
       </div>
+      
       `
      );
     }
@@ -198,39 +200,69 @@ const makeDefaultRecipes = () => {
 }
 
 
-
-let recipes = makeDefaultRecipes().map(
-  recipe => {
-    let r = document.createElement('article');
+const makeHTMLRecipe = recipe => {
+  let r = document.createElement('article');
     r.innerHTML = recipe.produceHTML();
-    r.className = 'recipe';
+    r.className = 'recipe recipe-in';
+    r.querySelector('.delete').addEventListener("click", () => {
+      r.className = 'recipe recipe-out'
+      setTimeout(() => {
+        let parent = r.parentElement;
+        parent.removeChild(r);
+      }, 300);
+      
+    })
     return r;
-  }
-);
+}
 
-recipes.forEach(
-  recipe => {
+const putHTMLRecipe = recipe => {
     let destination = document.querySelector('#grid');
     destination.appendChild(recipe);
-  }
-);
+}
+
+let recipes = makeDefaultRecipes().map(makeHTMLRecipe);
+recipes.forEach(putHTMLRecipe);
 
 
 const showRecipe = (i) => {
   if (i == recipes.length) return;
   console.log(recipes.length);
   setTimeout(() => {
-    recipes[i].className += ' recipe-v';
+    recipes[i].className = 'recipe recipe-visible';
     showRecipe(i + 1);
   }, 150);
   
 }
 
-
+const addRecipe = () => {
+  let form = document.forms['myform'];
+  let recipe = new Recipe(form['image'].value,
+                          form['name'].value,
+                          form['desc'].value,
+                          form['ing'].value,
+                          form['steps'].value
+  );
+  recipes.push(recipe);
+  
+}
 
 showRecipe(0);
-document.addEventListener("mouseover", (e) => {
-  console.log(e);
+
+let button = document.querySelector('.new');
+let form = document.querySelector('.form');
+button.addEventListener('click', () => {
+  if (form.className == 'form form-v')
+    form.className = 'form form-h';
+  else 
+    form.className = 'form form-v';
+})
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addRecipe();
+  recipes[recipes.length - 1] = makeHTMLRecipe(recipes[recipes.length - 1]);
+  putHTMLRecipe(recipes[recipes.length - 1]);
+  showRecipe(recipes.length - 1);
+  console.log("done");
 })
 
 

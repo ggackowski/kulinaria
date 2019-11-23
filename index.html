@@ -32,6 +32,38 @@
         
       </div>
     </main>
+
+
+    <section class="form form-h">
+        <h4>Dodaj nowy przepis</h4>
+        <form name="myform" action="/src/img" method="post">
+          <label for="">
+            Zdjęcie
+            <input id="image" type="file" />
+          </label>
+          <label for="name">
+            Nazwa przepisu
+            <input type="text" name="name">
+          </label>
+          <label for="desc">
+          Opis
+            <input type="text" name="desc">
+          </label>
+          <label for="ing">
+          Składniki
+            <textarea name="ing"></textarea>
+          </label>
+          <label for="steps">
+          Sposób wykonania
+            <textarea name="steps"></textarea>
+          </label>
+          <button type="submit">Dodaj</button>
+        </form>
+    </section>
+    
+
+
+    
     <div class="banner" id="contact"><h1>Kontakt</h1></div>
     <section>
       <div>
@@ -41,12 +73,14 @@
           <div class="enter"><input type="button" value="Wyślij" class="Gray"></div>
         </form>
       </div>
-    </section>
+      </section>
       <footer>
         <p>Grzegorz Gackowski 2019</p>
-        <button class="delete">X
-        </button>
+        
       </footer>
+      <section class="new">
+        <button>Dodaj</button>
+      </section>
     <script src="app.js"></script>
   </body>
 </html>
