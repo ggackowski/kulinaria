@@ -30,10 +30,10 @@ const mRecipe = (img, title, desc, ing, steps) => {
   item.className = 'recipe recipe-in';
   item.innerHTML = `
                     <div class="delete"><p>X</p></div>
-                    <div>
+                    <div class="img-cover">
                     ${convertImg(img)}
-                    </div class="img-cover">
-                    <div> 
+                    </div>
+                    <div class="rec-text"> 
                     ${convertTitle(title)} 
                     ${convertDesc(desc)}
                     </div>
@@ -246,3 +246,13 @@ form.addEventListener('submit', (e) => {
 })
 
 
+const makeImgRatio = (img, x, y) => {
+  let width = img.width;
+  let height = img.height;
+  let scaleNew = y / x;
+  let scaleOld = height/width;
+  height *= scale;
+  img.style.width = `${width}px`;
+  img.style.height = `${height}px`;
+
+}
