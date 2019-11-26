@@ -5,7 +5,7 @@ body {
   --main-color: #F25F5C;
   --second-color: #50514F;
   --second-darker-color: rgb(62, 63, 61);
-  --border-color: #FFE066;
+  --action-color: #5951f0;
 }
 p {
   font-family: 'Lato', sans-serif;
@@ -148,24 +148,22 @@ nav > ul > a:hover {
   border-radius: 6px;
   position: relative;
   transition: opacity 0.2s ease-in-out;
+  min-height: 400px;
 }
 
 .recipe img {
-  width: inherit;
+  height: 200px;
+  width: 100%;
   object-fit: cover;
-  padding: 0px;
-  margin: 0px;
 }
 
 .img-cover {
-  width: 100%;
-  padding: 0px;
-  margin: 0px;
+  
 }
 
 .rec-text {
   padding: 15px;
-  height: 100%;
+  
 }
 
 .recipe:hover {
@@ -188,11 +186,6 @@ nav > ul > a:hover {
   filter: brightness(80%);
   transition: filter 0.2s;
   cursor: pointer;
-}
-
-
-.recipe  div {
-  
 }
 
 .popup {
@@ -280,7 +273,7 @@ section * {
   z-index: 10;
   justify-content: center;
   align-items: center;
-  background-color: #5951f0;
+  background-color: var(--action-color);
   font-size: 18px;
   font-weight: 900;
   color: white;
@@ -302,7 +295,8 @@ section * {
   margin: 0px;
   background-color: white;
   padding: 20px;
-  border: 1px solid red;
+  border: 4px solid var(--second-color);
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
   width: 400px;
@@ -321,10 +315,7 @@ section * {
 }
 
 .new {
-  margin: 0;
-  position: fixed;
-  right: 0;
-  top: 50%;
+  
 }
 
 .form > form {
@@ -342,4 +333,59 @@ section * {
 .form button {
   justify-self: self-end;
   width: 50%;
+}
+
+.Action {
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  font-size: 18px;
+  font-weight: 900;
+  color: white;
+  border-radius: 1em;
+  width: 2em;
+  height: 2em;
+  padding: 0;
+  text-align: center;
+  position: fixed;
+  right: 0px;
+  top: 50%;
+  transition: right 0.2s, transform 0.2s;
+  
+  
+}
+.red {
+  background-color: var(--main-color);
+}
+
+.blue {
+  background-color: var(--action-color);
+  transform: rotate(180deg);
+  
+}
+
+.hidden {
+  display: none;
+}
+
+.info {
+  position: fixed;
+  background-color: white;
+  margin: auto;
+  z-index: 20;
+  width: 90%;
+  height: 80%;
+  left: 5%;
+  top: 5%;
+  padding: 20px;
+  border: 4px solid var(--second-color);
+  border-radius: 6px;
+}
+
+.Action:hover {
+  cursor: pointer;
+  
+  right: 5px;
 }

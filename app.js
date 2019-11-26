@@ -37,6 +37,14 @@ const mRecipe = (img, title, desc, ing, steps) => {
                     ${convertTitle(title)} 
                     ${convertDesc(desc)}
                     </div>
+                    <div class="info hidden">
+                    <h2>${convertTitle(title)} </h2>
+                    <h4>${convertDesc(desc)}</h4>
+                    <div>
+                    ${convertIngredients(ing)}
+                    ${convertSteps(steps)}
+                    </div>
+                    </div>
                   `;
   item.querySelector('.delete').addEventListener("click", () => {
       item.className = 'recipe recipe-out'
@@ -45,6 +53,18 @@ const mRecipe = (img, title, desc, ing, steps) => {
         parent.removeChild(item);
       }, 300);
       
+  })
+
+  item.querySelector('.info').addEventListener('click', () => {
+    
+  })
+
+  item.addEventListener('click', () => {
+    description = item.querySelector('.info');
+    if (description.className == 'info hidden') 
+      description.className = 'info';
+    else 
+      description.className = 'info hidden';
   })
   return item;       
 }
@@ -208,7 +228,7 @@ const sDefRecipes = (i) => {
     recipes[i].className = 'recipe recipe-visible';
     if (i != recipes.length - 1)
     sDefRecipes(i + 1);
-  }, 550);
+  }, 150);
 }
 
 const sRecipe = recipe => {
@@ -228,9 +248,15 @@ const lRecipe = () => {
 
 sDefRecipes(0);
 
-let button = document.querySelector('.new');
+let button = document.querySelector('.Action');
 let form = document.querySelector('.form');
+
 button.addEventListener('click', () => {
+  if (button.className == 'Action red')
+    button.className = 'Action blue';
+  else
+    button.className = 'Action red';
+
   if (form.className == 'form form-v')
     form.className = 'form form-h';
   else 
@@ -240,19 +266,9 @@ button.addEventListener('click', () => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   let nRecipe = lRecipe();
+  form.className = 'form form-h';
+  form.querySelector('form').reset();
   document.querySelector('#grid').appendChild(nRecipe);
   sRecipe(nRecipe);
   console.log("done");
 })
-
-
-const makeImgRatio = (img, x, y) => {
-  let width = img.width;
-  let height = img.height;
-  let scaleNew = y / x;
-  let scaleOld = height/width;
-  height *= scale;
-  img.style.width = `${width}px`;
-  img.style.height = `${height}px`;
-
-}

@@ -3,8 +3,6 @@
   <head>
     <title>Kulinaria</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="croppie.css" />
-  <script src="croppie.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
   </head>
   <body>
@@ -39,9 +37,9 @@
     <section class="form form-h">
         <h4>Dodaj nowy przepis</h4>
         <form name="myform" action="/src/img" method="post">
-          <label for="">
+          <label for="image">
             Zdjęcie
-            <input id="image" type="file" />
+            <input type="text" name="image">
           </label>
           <label for="name">
             Nazwa przepisu
@@ -59,7 +57,7 @@
           Sposób wykonania
             <textarea name="steps"></textarea>
           </label>
-          <button type="submit">Dodaj</button>
+          <div class="enter"><input type="button" class="Gray" type="submit" value="Dodaj"></input></div>
         </form>
     </section>
     
@@ -80,9 +78,9 @@
         <p>Grzegorz Gackowski 2019</p>
         
       </footer>
-      <section class="new">
-        <button>Dodaj</button>
-      </section>
+      
+        <div class="Action red"><p><</p></div>
+      
     <script src="app.js"></script>
   </body>
 </html>
