@@ -1,60 +1,57 @@
-class Recipe {
-  constructor(img, title, desc, ingredients, steps) {
-    this.img = img;
-    this.title = title;
-    this.desc = desc
-    this.ingredients = ingredients;
-    this.steps = steps;
-    this.toString = function() {
-      return `obrazek: ${this.img}\nskladniki: ${this.ingredients}\nopis: ${this.steps}`;
-    }
+const convertImg = (img) => {
+  return `<img src=${img}>`;
+}
 
-    this.convertImg = function() {
-      return `<img src=${this.img}>`;
-    }
+const convertSteps = (steps) => {
+  return `<p>${steps}</p>`;
+}
 
-    this.convertSteps = function() {
-      return `<p>${this.steps}</p>`;
-    }
+const convertTitle = (title) => {
+  return `<h1>${title}</h1>`;
+}
 
-    this.convertTitle = function() {
-      return `<h1>${this.title}</h1>`;
-    }
+const convertDesc = (desc) => {
+  return `<p>${desc}</p>`
+}
 
-    this.convertDesc = function() {
-      return `<p>${this.desc}</p>`
-    }
-    
-    this.convertIngredients = function() {
-      let ings = this.ingredients.split(/\r?\n/).filter(f => f != "");
-      let res = '<ul>';
-      for (let ing of ings) {
-        let oneLine = `<li>${ing}</li>`;
-        res += oneLine;
-      }
-      res += '</ul>';
-      return res;
-    }
-
-    this.produceHTML = function() {
-      return (`
-      <div class="delete"><p>X</p></div>
-      ${this.convertImg()}
-      <div> 
-      ${this.convertTitle()} 
-      ${this.convertDesc()}
-      </div>
-      
-      `
-     );
-    }
+const convertIngredients = (ingredients) => {
+  let ings = ingredients.split(/\r?\n/).filter(f => f != "");
+  let res = '<ul>';
+  for (let ing of ings) {
+    let oneLine = `<li>${ing}</li>`;
+    res += oneLine;
   }
+  res += '</ul>';
+  return res;
+}
 
+const mRecipe = (img, title, desc, ing, steps) => {
+  let item = document.createElement('article');
+  item.className = 'recipe recipe-in';
+  item.innerHTML = `
+                    <div class="delete"><p>X</p></div>
+                    <div>
+                    ${convertImg(img)}
+                    </div class="img-cover">
+                    <div> 
+                    ${convertTitle(title)} 
+                    ${convertDesc(desc)}
+                    </div>
+                  `;
+  item.querySelector('.delete').addEventListener("click", () => {
+      item.className = 'recipe recipe-out'
+      setTimeout(() => {
+        let parent = item.parentElement;
+        parent.removeChild(item);
+      }, 300);
+      
+  })
+  return item;       
 }
 
 const makeDefaultRecipes = () => {
   let recipes = [];
-  recipes.push(new Recipe('src/img/serniczek.png', 
+  recipes.push(mRecipe('src/img/serniczek.png', 
   'Sernik królewski', 
   'Zdecydowanie najlepszy przepis na sernik królewski, który powstaje z ciasta kruchego z dodatkiem kakao oraz z idealnej masy serowej. Sernik królewski to jedno z pyszniejszych ciast, jakie pieczemy na Święta.',
   `2 szklanki (320 g) mąki pszennej\n 
@@ -88,7 +85,7 @@ const makeDefaultRecipes = () => {
   Wyjąć z piekarnika i ostudzić. Można posypać cukrem pudrem lub polać lukrem cytrynowym.`
   ));
 
-  recipes.push(new Recipe('src/img/panini.png', 
+  recipes.push(mRecipe('src/img/panini.png', 
   'Panini włoskie', 
   'Włosi, słyną z pizzy i pasty, ale są także mistrzami kanapek. Łatwo zrobisz je w domu.',
   `chleb typu panini 4 szt.\n
@@ -109,7 +106,7 @@ const makeDefaultRecipes = () => {
   Rukolę wymieszaj z oliwą. Gotowe panini przekrój na pół i podawaj z sałatką.`
   ));
 
-  recipes.push(new Recipe('src/img/pierogi.png', 
+  recipes.push(mRecipe('src/img/pierogi.png', 
   'Pierogi ruskie', 
   'Każdy ma swój sposób na ruskie pierogi. W moim rodzinnym domu najlepsze ruskie robiła babcia, jej tajemniczym składnikiem był biały pieprz oraz bryndza, gałka muszkatołowa, masło i karmelizowana cebula.',
   `1/5 kg mąki\n
@@ -139,7 +136,7 @@ const makeDefaultRecipes = () => {
   Ugotowane pierogi podajemy z cebulką przygotowaną w ten sam sposób, co do farszu (czyli na maśle, z solą i cukrem) oraz kwaśną śmietaną 18%. Na drugi dzień odsmażane na masełku lub smażone na głębokim.  `
   ));
 
-  recipes.push(new Recipe('src/img/papryki.png', 
+  recipes.push(mRecipe('src/img/papryki.png', 
   'Fit papryczki', 
   'Co zrobić z papryki na obiad? Możliwości jest naprawdę mnóstwo: papryka jest warzywem na tyle uniwersalnym, że bez problemu można wyczarować z niej zarówno przepisy fit i dietetyczne, jak i nieco bardziej sycące posiłki. Jak wykorzystać paprykę w naszej kuchni? Oto kilka przepisów: nie tylko z parowaru.',
   `1/5 kg mąki\n
@@ -159,7 +156,7 @@ const makeDefaultRecipes = () => {
   `Co przygotować na obiad dietetyczny, gdy chcemy być fit, a jednocześnie zachować pełnię smaku potrawy? Idealnym rozwiązaniem będzie bez wątpienia faszerowana papryka z parowaru. Paprykę o wybranym przez nas kolorze myjemy i odcinamy górę, usuwamy korzonek, gniazdo oraz białe błonki. W misce przygotowujemy farsz: tu wiele zależy od naszych preferencji smakowych. Jeśli chcemy, by przepis był bardzo dietetyczny i fit, postawmy na farsz z kaszy jaglanej z dodatkiem grillowanych warzyw, jeśli zależy nam na bardziej sycącej wersji tego dania, możemy przygotować farsz meksykański z ryżu i mięsa mielonego z dodatkiem pomidorowej pasaty. Gdy farsz już będzie gotowy, włóżmy go do papryki i przykryjmy ją odciętą górną częścią. Warzywo umieśćmy w parowarze i gotujmy na parze około 30 minut. Smacznego!`
   ));
 
-  recipes.push(new Recipe('src/img/pizza.png', 
+  recipes.push(mRecipe('src/img/pizza.png', 
   'Pizza z szynką', 
   'Pizza, włoski przysmak znany i ceniony na całym świecie podawany jest z różnymi dodatkami. Pyszne ciasto najczęściej kojarzy się ze smaczną, chrupiącą skórką, słodkim sosem pomidorowym i dużą ilością pysznego sera. Jak przygotować ten włoski specjał i co powinniśmy o nim wiedzieć?',
   `2 szklanki mąki\n
@@ -181,7 +178,7 @@ const makeDefaultRecipes = () => {
   ` Drożdże rozdrabiamy w ¼ szklanki wody letniej wody. Do miski wsypujemy przesianą wcześniej mąkę i rozdrobnione drożdże, resztę wody mieszamy z dwiema łyżkami oliwy i solą. Wyrabiamy ciasto i pozostawiamy do wyrośnięcia na około 30 minut. Następnie przekładamy je na przygotowaną blaszkę i rozciągamy po niej. Cebulę szklimy na oliwie, dodajemy umyte i pokrojone w plasterki pieczarki. Dusimy do całkowitego odparowania wody z pieczarek. Koncentrat pomidorowy mieszamy z ziołami prowansalskimi, tymiankiem oraz suszoną bazylią. Smarujemy nim wyłożone w blaszce ciasto. Układamy szynkę, starty na grubych oczkach żółty ser, a także pieczarki z cebulą. Pieczemy w temperaturze 200 stopni Celsjusza przez około 20 minut.`
   ));
 
-  recipes.push(new Recipe('src/img/indyk.png', 
+  recipes.push(mRecipe('src/img/indyk.png', 
   'Pierś z indyka', 
   'Pierś z indyka to fajna alternatywa dla piersi z kurczaka. Ma nieco inny smak niż pierś kurczaka, ale można ją przyrządzić na bardzo wiele różnych sposobów. Jest ponadto bardzo zdrowa - ma mniej kalorii niż pierś z kurczaka oraz jest doskonałym źródłem witamin z grupy B.',
   `podwójna pierś z indyka\n
@@ -195,58 +192,41 @@ const makeDefaultRecipes = () => {
 
   Na patelni rozgrzej olej. Przełóż mięso i podsmaż z obu stron. Potem zmniejsz ogień, dodaj pozostałości marynaty i podlej wodą. Przykryj przykrywką i duś, aż mięso będzie miękkie. W razie potrzeby dolewaj wodę. Do kubeczka wlej odrobinę zimnej wody, dodaj mąkę, a następnie trochę sosu z patelni. Wymieszaj dokładnie, by nie było grudek i wlej na patelnię. Wymieszaj dokładnie z mięsem i gdy sos się dobrze zagęści, zdejmij z palnika. `
   ));
+  let destination = document.querySelector('#grid');
+  for (let recipe of recipes) {
+    destination.appendChild(recipe);
+  }
   return recipes;
 
 }
 
-
-const makeHTMLRecipe = recipe => {
-  let r = document.createElement('article');
-    r.innerHTML = recipe.produceHTML();
-    r.className = 'recipe recipe-in';
-    r.querySelector('.delete').addEventListener("click", () => {
-      r.className = 'recipe recipe-out'
-      setTimeout(() => {
-        let parent = r.parentElement;
-        parent.removeChild(r);
-      }, 300);
-      
-    })
-    return r;
-}
-
-const putHTMLRecipe = recipe => {
-    let destination = document.querySelector('#grid');
-    destination.appendChild(recipe);
-}
-
-let recipes = makeDefaultRecipes().map(makeHTMLRecipe);
-recipes.forEach(putHTMLRecipe);
+let recipes = makeDefaultRecipes();
 
 
-const showRecipe = (i) => {
-  if (i == recipes.length) return;
-  console.log(recipes.length);
-  setTimeout(() => {
+const sDefRecipes = (i) => {
+  setTimeout( () => {
     recipes[i].className = 'recipe recipe-visible';
-    showRecipe(i + 1);
-  }, 150);
-  
+    if (i != recipes.length - 1)
+    sDefRecipes(i + 1);
+  }, 550);
 }
 
-const addRecipe = () => {
+const sRecipe = recipe => {
+  recipe.className = 'recipe recipe-visible';
+}
+
+const lRecipe = () => {
   let form = document.forms['myform'];
-  let recipe = new Recipe(form['image'].value,
+  let recipe = mRecipe(form['image'].value,
                           form['name'].value,
                           form['desc'].value,
                           form['ing'].value,
                           form['steps'].value
   );
-  recipes.push(recipe);
-  
+  return recipe;
 }
 
-showRecipe(0);
+sDefRecipes(0);
 
 let button = document.querySelector('.new');
 let form = document.querySelector('.form');
@@ -256,14 +236,13 @@ button.addEventListener('click', () => {
   else 
     form.className = 'form form-v';
 })
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  addRecipe();
-  recipes[recipes.length - 1] = makeHTMLRecipe(recipes[recipes.length - 1]);
-  putHTMLRecipe(recipes[recipes.length - 1]);
-  showRecipe(recipes.length - 1);
+  let nRecipe = lRecipe();
+  document.querySelector('#grid').appendChild(nRecipe);
+  sRecipe(nRecipe);
   console.log("done");
 })
-
 
 

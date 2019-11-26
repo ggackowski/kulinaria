@@ -143,14 +143,22 @@ nav > ul > a:hover {
 }
 
 .recipe {
+  display: flex;
+  flex-direction: column;
   border: 4px solid var(--second-color);
   border-radius: 6px;
   position: relative;
   transition: opacity 0.2s ease-in-out;
 }
 
-.recipe  img {
+.recipe img {
   width: 100%;
+  object-fit: fill;
+}
+
+.img-cover {
+  height: 40%;
+  border: 1px solid red;
 }
 
 .recipe:hover {
