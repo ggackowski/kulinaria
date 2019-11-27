@@ -37,13 +37,25 @@ const mRecipe = (img, title, desc, ing, steps) => {
                     ${convertTitle(title)} 
                     ${convertDesc(desc)}
                     </div>
+
+
+
                     <div class="info hidden">
-                    <h2>${convertTitle(title)} </h2>
-                    <h4>${convertDesc(desc)}</h4>
+                      <article class="imgdesc">
+                        <div class="descript">
+                          <h2>${convertTitle(title)} </h2>
+                          <div class="imgshow"><img src="${img}"></img></div>
+                          <h4>${convertDesc(desc)}</h4>
+                          ${convertIngredients(ing)}                
+                        </div>
+                        <div class="steps">${convertSteps(steps)}</div>
+                      </article>
+                      
                     <div>
-                    ${convertIngredients(ing)}
-                    ${convertSteps(steps)}
+                      
+                      
                     </div>
+
                     </div>
                   `;
   item.querySelector('.delete').addEventListener("click", () => {
