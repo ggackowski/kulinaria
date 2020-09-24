@@ -262,8 +262,10 @@ sDefRecipes(0);
 
 let button = document.querySelector('.Action');
 let form = document.querySelector('.form');
+let submitButton = document.querySelector('.enter > input');
 
 button.addEventListener('click', () => {
+  console.log('wattt');
   if (button.className == 'Action red')
     button.className = 'Action blue';
   else
@@ -275,12 +277,17 @@ button.addEventListener('click', () => {
     form.className = 'form form-v';
 })
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
+submitButton.addEventListener('click', (e) => {
+  console.log('xd');
+  form.submit();
+});
+
+function onSubmit() {
+  console.log('here')
   let nRecipe = lRecipe();
   form.className = 'form form-h';
   form.querySelector('form').reset();
   document.querySelector('#grid').appendChild(nRecipe);
   sRecipe(nRecipe);
   console.log("done");
-})
+}
